@@ -66,23 +66,23 @@ Make sure your application or game is using the virtual line you created in VAC.
 - **Pth Model Files**: RVC v2 trained models only. Only recommended to use models trained with RMVPE pitch extraction. Supports 32000, 40000, 48000 trained models.
 - **Input/Output Devices**: Input is your real microphone, output is your VAC line.
 - **Pitch**: Change as needed. Adjustable in realtime.
-- **Block Size**: Critical setting. The optimal block size is the lowest you can get without audio being choppy. Listen to your output. This is GPU dependent, the more powerful the gpu, the lower the block size you can use. However the optimizations I made allow much smaller block sizes to work on lower end GPUs. Going over 0.20 generally will not improve quality, but is required for lower end cards not to sound choppy.
-
+- **Block Size**: Critical setting. The optimal block size is the lowest you can get without audio being choppy. Listen to your output. This is GPU dependent, the more powerful the gpu, the lower the block size you can use. However the optimizations I made allow much smaller block sizes to work on lower end GPUs. At extremely low block sizes, quality may be reduced.
 ### Audio Settings
 - **Audio Backend**: Use WASAPI unless you have an ASIO interface and know what you're doing (I am not supporting older protocols like MME)
 - **Exclusive Mode**: This is WASAPI Exclusive Mode. Leave off unless you know why you need it
 - **Sample Rate**: See notes above. Only 48000Hz is available. This is only the outgoing sample rate that matches your VAC line - It is compatible with 32000, 40000, or 48000 models
-- **RNNoise**: Forced on for now - greatly reduces input background noise
+- **RNNoise**: Greatly reduces input background noise for very minimum latency. Recommended to always leave on as background noise can disrupt the model.
 
 ### Advanced Settings
 You can change these if you want, but it's recommended to leave them as is.
-- **Lookahead buffer**: Gives the model more or less context to work with. Recommended 2.5 for best quality/latency ratio. The added latency of this setting is far less impactful than the block size.
+- **Lookahead buffer**: Gives the model more or less context to work with. Recommended 2.0 for best quality/latency ratio. The added latency of this setting is far less impactful than the block size.
 
 ## Basic Effects
-*Note: If you move sliders while in the middle of speaking, sound will have some minor popping. This is completely normal as you are applying effects in the middle of a block of audio being processed. Just don't move the sliders while speaking if possible, but it won't cause any issues.*
+*Note: If you move sliders while in the middle of speaking, sound will have some minor popping. This is completely normal as you are applying effects in the middle of a block of audio being processed.*
 
 - Gain: Control the output voice gain
 - Noise Gate: A simple noise gate so the application doesn't try to process low background noise that made it past RNNoise
+- EQ: Two customizable EQ bands
 
 More coming soon.
 
@@ -93,7 +93,7 @@ I set decent defaults, but lots of information on setting explanations can be fo
 
 1. Compressor
 2. Low and High pass filters
-3. Four customizable EQ bands
+3. Two extra customizable EQ bands
 4. Reverb Effects
 5. Chorus Effects
 6. An adjustable "Low Quality Mic" filter is available. This simulates a lower quality microphone to hide digital artifacts and sometimes sounds way more natural depending on the model.
