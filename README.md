@@ -1,19 +1,22 @@
 # Vonovox
-## Realtime AI Voice Converter for RVC Models
+## Realtime AI Voice Converter for RVC Models and RefineGAN models
 
 ![UI](docs/images/ui1.png)
 ![UI](docs/images/ui2.png)
 ![UI](docs/images/ui3.png)
 
 ## Overview
-FOR NVIDIA GPU's ONLY (GTX 900 or higher): This is a voice converter/changer that has a highly optimized pipeline for CUDA, with the lowest latency and highest model quality I was able to achieve as well as extra post-processing effects. Simple to use and setup.
+FOR NVIDIA GPU's ONLY (GTX 900 or higher): This is a voice converter/changer that has a highly optimized pipeline for CUDA, with the lowest latency and highest model quality I was able to achieve as well as extra post-processing effects.  Works on both RVC and RefineGAN models. Simple to use and setup.
 
 I wrote this application over many months and hours of development time and testing.
 
 You can join the [discord server](https://discord.gg/c9mbMGxEbR) to get support or ask questions.
 
 ## Details
+- First realtime inference implementation of RefineGAN models. You can train RefineGAN models with [Applio](https://github.com/IAHispano/Applio)
+- Detects and switches vocoders automatically between RVC (HiFi-GAN) and RefineGAN models at runtime.
 - NVIDIA Only. GTX 900 or later
+- Entire pipeline uses 32 bit or TF32 precision
 - Highly Optimized CUDA pipeline. Nearly every operation is processed on the GPU
 - Python 3.12.8, PyTorch 2.6.0, CUDA 12.6
 - Uses an optimized version of [FCPE](https://github.com/CNChTu/FCPE) for inference
