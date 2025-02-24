@@ -13,7 +13,7 @@ I wrote this application over many months and hours of development time and test
 You can join the [discord server](https://discord.gg/c9mbMGxEbR) to get support or ask questions.
 
 ## Details
-- First realtime inference implementation of RefineGAN models. You can train RefineGAN models with [Applio](https://github.com/IAHispano/Applio)
+- Realtime inference implementation of RefineGAN models. You can train RefineGAN models with [Applio](https://github.com/IAHispano/Applio)
 - Detects and switches vocoders automatically between RVC (HiFi-GAN) and RefineGAN models at runtime.
 - NVIDIA Only. GTX 900 or later
 - Entire pipeline uses 32 bit or TF32 precision
@@ -24,7 +24,7 @@ You can join the [discord server](https://discord.gg/c9mbMGxEbR) to get support 
 - Only for use with models trained in [RVCv2](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI)
 - Transformers [implementation](https://huggingface.co/lengyue233/content-vec-best) of [ContentVec](https://arxiv.org/pdf/2204.09224) for speech
 - Easy to use and setup - GUI core functional settings kept as minimal as possible
-- Good input noise reduction using RNNoise
+- Input noise reduction using RNNoise, as well as a VAC based detection using [Silero VAD](https://github.com/snakers4/silero-vad)
 - Very low latency for realtime standards
 - Compiled to C with Cython
 - Lightweight with minimal amount of packages
@@ -74,7 +74,10 @@ Make sure your application or game is using the virtual line you created in VAC.
 - **Audio Backend**: Use WASAPI unless you have an ASIO interface and know what you're doing (I am not supporting older protocols like MME)
 - **Exclusive Mode**: This is WASAPI Exclusive Mode. Leave off unless you know why you need it
 - **Sample Rate**: See notes above. Only 48000Hz is available. This is only the outgoing sample rate that matches your VAC line - It is compatible with 32000, 40000, or 48000 models
-- **RNNoise**: Greatly reduces input background noise for very minimum latency. Recommended to always leave on as background noise can disrupt the model.
+*Note: Noise reduction algorithms are not compatible with singing or whispering. Turn them off if you need to sing or whisper.*
+- **RNNoise**: Greatly filters input background noise for very minimum latency. 
+- **VAD Noise Reduction**: Completely mutes the output when speech is not detected. When speech is detected, it uses a 400ms release window. It is also much better at filtering breathe noises than RNNoise.
+- **VAD Threshold**: Controls the sensitivity of the VAD. If you speak very quietly, you may need to reduce this. Higher values will increase noise filtering, but too high may also cut out some quiet speech.
 
 ### Advanced Settings
 You can change these if you want, but it's recommended to leave them as is.

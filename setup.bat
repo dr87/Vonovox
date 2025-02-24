@@ -34,6 +34,7 @@ runtime\python.exe -m pip install --no-warn-script-location transformers==4.47.1
 runtime\python.exe -m pip install --no-warn-script-location pywin32==308
 runtime\python.exe -m pip install --no-warn-script-location pedalboard==0.9.16
 runtime\python.exe -m pip install --no-warn-script-location CTkMessagebox==2.7
+runtime\python.exe -m pip install --no-warn-script-location silero-vad==5.1.2
 
 echo Extracting Tkinter
 powershell -command "Expand-Archive -Force zips\tkinter3128.zip runtime"
