@@ -1,0 +1,16 @@
+torch
+torchvision
+torchaudio
+python-dotenv==1.0.1
+sounddevice==0.5.1
+local-attention==1.9.15
+faiss-cpu==1.9.0.post1
+customtkinter==5.2.2
+pyrnnoise==0.2.7
+librosa==0.10.2.post1
+transformers==4.47.1
+pywin32==308
+pedalboard==0.9.16
+CTkMessagebox==2.7
+silero-vad==5.1.2
+keyboard==0.13.5
