@@ -14,3 +14,4 @@ pedalboard==0.9.16
 CTkMessagebox==2.7
 silero-vad==5.1.2
 keyboard==0.13.5
+pydub==0.25.1

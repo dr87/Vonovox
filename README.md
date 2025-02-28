@@ -69,6 +69,7 @@ Make sure your application or game is using the virtual line you created in VAC.
 - **Pth Model Files**: RVC v2 trained models only. Only recommended to use models trained with RMVPE pitch extraction. Supports 32000, 40000, 48000 trained models.
 - **Input/Output Devices**: Input is your real microphone, output is your VAC line.
 - **Pitch**: Change as needed. Adjustable in realtime.
+- **Formant**: Adjust the formant of your voice without effecting the pitch. Change as needed. Adjustable in realtime.
 - **Block Size**: Critical setting. The optimal block size is the lowest you can get without audio being choppy. Listen to your output. This is GPU dependent, the more powerful the gpu, the lower the block size you can use. However the optimizations I made allow much smaller block sizes to work on lower end GPUs. At extremely low block sizes, quality may be reduced.
 ### Audio Settings
 - **Audio Backend**: Use WASAPI unless you have an ASIO interface and know what you're doing (I am not supporting older protocols like MME)
@@ -79,7 +80,21 @@ Make sure your application or game is using the virtual line you created in VAC.
 - **VAD Noise Reduction**: Completely mutes the output when speech is not detected. When speech is detected, it uses a 400ms release window. It is also much better at filtering breathe noises than RNNoise.
 - **VAD Threshold**: Controls the sensitivity of the VAD. If you speak very quietly, you may need to reduce this. Higher values will increase noise filtering, but too high may also cut out some quiet speech.
 
-### Advanced Settings
+## Realtime Sound File Inferencing.
+
+![Sound](docs/images/soundfile.png)
+
+You are able to load and play sound files, converted to your model's voice in realtime! The way this works is as following:
+
+The sound file replaces your input mic while active. Whatever sound is coming from your loaded file is your "new microphone" while the sound is playing. That means it will infer and play the sound file as if it was your own voice in realtime. You can play speech, singing, or whatever you want. Just make sure the audio is clean, as the client still needs to inference it, no different than the real mic.
+
+When a sound file is playing, it will zero out the input from your real mic, meaning you don't have to worry about overlapping your voice with playback. Mic will automatically unmute when sound is playing again. Also mute and unmute is handled properly when pausing and resuming the playback of audio files.
+
+Seek timer and playback timer so you can go to specific times in your sound file.
+
+Supports wav mp3 and flac.
+
+## Advanced Settings
 You can change these if you want, but it's recommended to leave them as is.
 - **Lookahead buffer**: Gives the model more or less context to work with. Recommended 2.0 for best quality/latency ratio. The added latency of this setting is far less impactful than the block size.
 
