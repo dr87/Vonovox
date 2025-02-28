@@ -41,12 +41,32 @@ runtime\python.exe -m pip install --no-warn-script-location pydub==0.25.1
 echo Extracting Tkinter
 powershell -command "Expand-Archive -Force zips\tkinter3128.zip runtime"
 
+rem // Updated assets download and extraction block using a flag
+set "download_assets=false"
+if not exist "assets/contentvec/pytorch_model.bin" set "download_assets=true"
+if not exist "assets/contentvec/config.json" set "download_assets=true"
+if not exist "assets/fcpe/fcpe_c_v001.pt" set "download_assets=true"
+if "%download_assets%"=="false" (
+echo Assets already exist, skipping assets download.
+) else (
 echo Downloading assets...
 curl -L "https://huggingface.co/datasets/dr87/vc-assets/resolve/main/assets.zip" -o assets.zip
-
 echo Extracting assets...
 powershell -command "Expand-Archive -Force assets.zip ."
 del assets.zip
+)
+
+echo Downloading FFmpeg...
+if exist "ffmpeg.exe" (
+echo ffmpeg.exe already exists, skipping FFmpeg download.
+) else (
+curl -L "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip" -o ffmpeg.zip
+echo Extracting ffmpeg.exe...
+powershell -command "Expand-Archive -Force ffmpeg.zip temp_ffmpeg"
+move /Y temp_ffmpeg\ffmpeg-master-latest-win64-gpl-shared\bin\ffmpeg.exe .
+rd /s /q temp_ffmpeg
+del ffmpeg.zip
+)
 
 echo Setup complete!
 pause
