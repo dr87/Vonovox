@@ -45,6 +45,7 @@ rem // Updated assets download and extraction block using a flag
 set "download_assets=false"
 if not exist "assets/contentvec/pytorch_model.bin" set "download_assets=true"
 if not exist "assets/contentvec/config.json" set "download_assets=true"
+if not exist "assets/rmvpe/rmvpe.pt" set "download_assets=true"
 if not exist "assets/fcpe/fcpe_c_v001.pt" set "download_assets=true"
 if "%download_assets%"=="false" (
 echo Assets already exist, skipping assets download.

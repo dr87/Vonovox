@@ -19,7 +19,7 @@ You can join the [discord server](https://discord.gg/c9mbMGxEbR) to get support 
 - Entire pipeline uses 32 bit or TF32 precision
 - Highly Optimized CUDA pipeline. Nearly every operation is processed on the GPU
 - Python 3.12.8, PyTorch 2.6.0, CUDA 12.6
-- Uses an optimized version of [FCPE](https://github.com/CNChTu/FCPE) for inference
+- Can use either FCPE or RMVPE for inference
 - Modern style GUI written in [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter)
 - Only for use with models trained in [RVCv2](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI)
 - Transformers [implementation](https://huggingface.co/lengyue233/content-vec-best) of [ContentVec](https://arxiv.org/pdf/2204.09224) for speech
@@ -93,6 +93,8 @@ When a sound file is playing, it will zero out the input from your real mic, mea
 Seek timer and playback timer so you can go to specific times in your sound file.
 
 Supports wav mp3 and flac.
+
+*Note: If you are playing singing files with high pitch, you must turn off all noise suppression options as suppression models are trained on speech, not high pitch singing*
 
 ## Advanced Settings
 You can change these if you want, but it's recommended to leave them as is.
