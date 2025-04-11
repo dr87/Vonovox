@@ -37,6 +37,9 @@ runtime\python.exe -m pip install --no-warn-script-location CTkMessagebox==2.7
 runtime\python.exe -m pip install --no-warn-script-location silero-vad==5.1.2
 runtime\python.exe -m pip install --no-warn-script-location keyboard==0.13.5
 runtime\python.exe -m pip install --no-warn-script-location pydub==0.25.1
+runtime\python.exe -m pip install --no-warn-script-location matplotlib==3.10.1
+runtime\python.exe -m pip install --no-warn-script-location numpy==1.26.4
+runtime\python.exe -m pip install --no-warn-script-location rich==14.0.0
 
 echo Extracting Tkinter
 powershell -command "Expand-Archive -Force zips\tkinter3128.zip runtime"
@@ -44,6 +47,8 @@ powershell -command "Expand-Archive -Force zips\tkinter3128.zip runtime"
 rem // Updated assets download and extraction block using a flag
 set "download_assets=false"
 if not exist "assets/contentvec/pytorch_model.bin" set "download_assets=true"
+if not exist "assets/upscaler/24kto48k/g_24kto48k" set "download_assets=true"
+if not exist "assets/upscaler/24kto48k/config.json" set "download_assets=true"
 if not exist "assets/contentvec/config.json" set "download_assets=true"
 if not exist "assets/rmvpe/rmvpe.pt" set "download_assets=true"
 if not exist "assets/fcpe/fcpe_c_v001.pt" set "download_assets=true"

@@ -15,3 +15,6 @@ CTkMessagebox==2.7
 silero-vad==5.1.2
 keyboard==0.13.5
 pydub==0.25.1
+matplotlib==3.10.1
+rich==14.0.0
+numpy==1.26.4

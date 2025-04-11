@@ -6,16 +6,14 @@
 ![UI](docs/images/ui3.png)
 
 ## Overview
-FOR NVIDIA GPU's ONLY (GTX 900 or higher): This is a voice converter/changer that has a highly optimized pipeline for CUDA, with the lowest latency and highest model quality I was able to achieve as well as extra post-processing effects.  Works on both RVC and RefineGAN models. Simple to use and setup.
+FOR NVIDIA GPU's ONLY (GTX 900 or higher): AMD Support will come soon. This is a voice converter/changer that has a highly optimized pipeline for CUDA, with the lowest latency and highest model quality I was able to achieve as well as extra post-processing effects.  Works with RVC models. Simple to use and setup.
 
 I wrote this application over many months and hours of development time and testing.
 
 You can join the [discord server](https://discord.gg/c9mbMGxEbR) to get support or ask questions.
 
 ## Details
-- Realtime inference implementation of RefineGAN models. You can train RefineGAN models with [Applio](https://github.com/IAHispano/Applio)
-- Detects and switches vocoders automatically between RVC (HiFi-GAN) and RefineGAN models at runtime.
-- NVIDIA Only. GTX 900 or later
+- NVIDIA Only. GTX 900 or later.
 - Entire pipeline uses 32 bit or TF32 precision
 - Highly Optimized CUDA pipeline. Nearly every operation is processed on the GPU
 - Python 3.12.8, PyTorch 2.6.0, CUDA 12.6
@@ -25,12 +23,10 @@ You can join the [discord server](https://discord.gg/c9mbMGxEbR) to get support 
 - Transformers [implementation](https://huggingface.co/lengyue233/content-vec-best) of [ContentVec](https://arxiv.org/pdf/2204.09224) for speech
 - Easy to use and setup - GUI core functional settings kept as minimal as possible
 - Input noise reduction using RNNoise, as well as a VAC based detection using [Silero VAD](https://github.com/snakers4/silero-vad)
+- 48k Optional Upscaling algorithm using [AP-BWE](https://arxiv.org/abs/2401.06387). I've modified it to work in realtime, as the original implementation is only for sound files. You can record your audio and analyze the enhanced spectrum with and without to test.
 - Very low latency for realtime standards
 - Compiled to C with Cython
-- Lightweight with minimal amount of packages
-- Self-contained Python environment (no separate Python installation needed)
 - Post-processing effects built in with settings
-- See requirements.txt for all libraries used.
 
 ## Virtual Cable Setup
 You should always use [VAC](https://software.muzychenko.net/freeware/vac470lite.zip) over VB-Audio or other options. It works much better with realtime applications and has less glitches and artifacts. Make sure your virtual line(s) are also set at 48000hz (1 channel, 16 bit recommended).
@@ -40,7 +36,7 @@ I put a focus to make this setup process as easy as possible.
 
 1. Make sure you have this [Microsoft Redistributable package](https://aka.ms/vs/16/release/vc_redist.x64.exe)
 2. Download the latest release on this page
-3. Run `setup.bat` to create a local python environment and download all packages and assets
+3. Run `setup.bat` (run the RTX_5000 setup if you have an RTX 5000 card) to create a local python environment and download all packages and assets
 4. Run `start.bat` to start the voice converter. First run may take some extra time.
 5. Load whichever RVC v2 model you choose.
 
@@ -78,7 +74,7 @@ Make sure your application or game is using the virtual line you created in VAC.
 *Note: Noise reduction algorithms are not compatible with singing or whispering. Turn them off if you need to sing or whisper.*
 - **RNNoise**: Greatly filters input background noise for very minimum latency. 
 - **VAD Noise Reduction**: Completely mutes the output when speech is not detected. When speech is detected, it uses a 400ms release window. It is also much better at filtering breathe noises than RNNoise.
-- **VAD Threshold**: Controls the sensitivity of the VAD. If you speak very quietly, you may need to reduce this. Higher values will increase noise filtering, but too high may also cut out some quiet speech.
+- **AP-BWE 48K Upscaling**: Upscales audio with Speech bandwidth extension. More info here https://arxiv.org/abs/2401.06387
 
 ## Realtime Sound File Inferencing.
 
