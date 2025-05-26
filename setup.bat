@@ -22,7 +22,7 @@ del runtime\get-pip.py
 
 echo Installing Packages
 :: Install packages
-runtime\python.exe -m pip install --no-warn-script-location torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+runtime\python.exe -m pip install --no-warn-script-location torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
 runtime\python.exe -m pip install --no-warn-script-location python-dotenv==1.0.1
 runtime\python.exe -m pip install --no-warn-script-location sounddevice==0.5.1
 runtime\python.exe -m pip install --no-warn-script-location local-attention==1.9.15
