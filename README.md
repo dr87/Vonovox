@@ -1,5 +1,5 @@
 # Vonovox
-## Realtime AI Voice Converter for RVC Models and RefineGAN models
+## Realtime AI Voice Converter for RVC Models
 
 ![UI](docs/images/ui1.png)
 ![UI](docs/images/ui2.png)
@@ -13,18 +13,16 @@ I wrote this application over many months and hours of development time and test
 You can join the [discord server](https://discord.gg/c9mbMGxEbR) to get support or ask questions.
 
 ## Details
-- NVIDIA Only. GTX 900 or later.
-- Entire pipeline uses 32 bit or TF32 precision
+- NVIDIA Only
 - Highly Optimized CUDA pipeline. Nearly every operation is processed on the GPU
-- Python 3.12.8, PyTorch 2.6.0, CUDA 12.6
+- Python 3.12.8, PyTorch 2.7.0, CUDA 12.8
 - Can use either FCPE or RMVPE for inference
 - Modern style GUI written in [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter)
 - Only for use with models trained in [RVCv2](https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI)
-- Transformers [implementation](https://huggingface.co/lengyue233/content-vec-best) of [ContentVec](https://arxiv.org/pdf/2204.09224) for speech
-- Easy to use and setup - GUI core functional settings kept as minimal as possible
+- Transformers [implementation](https://huggingface.co/lengyue233/content-vec-best) of [ContentVec](https://arxiv.org/pdf/2204.09224) for speeche
 - Input noise reduction using RNNoise, as well as a VAC based detection using [Silero VAD](https://github.com/snakers4/silero-vad)
 - 48k Optional Upscaling algorithm using [AP-BWE](https://arxiv.org/abs/2401.06387). I've modified it to work in realtime, as the original implementation is only for sound files. You can record your audio and analyze the enhanced spectrum with and without to test.
-- Very low latency for realtime standards
+- Low latency
 - Compiled to C with Cython
 - Post-processing effects built in with settings
 
@@ -63,6 +61,7 @@ Make sure your application or game is using the virtual line you created in VAC.
 
 ### General Settings
 - **Pth Model Files**: RVC v2 trained models only. Only recommended to use models trained with RMVPE pitch extraction. Supports 32000, 40000, 48000 trained models.
+- **Embedder**: Select between contentvec or spin trained models. Most current models are trained on contentvec
 - **Input/Output Devices**: Input is your real microphone, output is your VAC line.
 - **Pitch**: Change as needed. Adjustable in realtime.
 - **Formant**: Adjust the formant of your voice without effecting the pitch. Change as needed. Adjustable in realtime.
