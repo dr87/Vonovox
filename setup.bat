@@ -47,9 +47,11 @@ powershell -command "Expand-Archive -Force zips\tkinter3128.zip runtime"
 rem // Updated assets download and extraction block using a flag
 set "download_assets=false"
 if not exist "assets/contentvec/pytorch_model.bin" set "download_assets=true"
+if not exist "assets/spin/pytorch_model.bin" set "download_assets=true"
 if not exist "assets/upscaler/24kto48k/g_24kto48k" set "download_assets=true"
 if not exist "assets/upscaler/24kto48k/config.json" set "download_assets=true"
 if not exist "assets/contentvec/config.json" set "download_assets=true"
+if not exist "assets/spin/config.json" set "download_assets=true"
 if not exist "assets/rmvpe/rmvpe.pt" set "download_assets=true"
 if not exist "assets/fcpe/fcpe_c_v001.pt" set "download_assets=true"
 if "%download_assets%"=="false" (
