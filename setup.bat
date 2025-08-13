@@ -2,23 +2,29 @@
 cd /d "%~dp0"
 
 mkdir configs 2>nul
-echo Downloading Python 3.12.8 embedded package...
-curl -L "https://www.python.org/ftp/python/3.12.8/python-3.12.8-embed-amd64.zip" -o python_embed.zip
 
-echo Extracting
-powershell -command "Expand-Archive -Force python_embed.zip runtime"
-del python_embed.zip
-
-echo Creating directories
-if not exist "runtime\Lib" mkdir "runtime\Lib"
-if not exist "runtime\Lib\site-packages" mkdir "runtime\Lib\site-packages"
-if not exist "runtime\Scripts" mkdir "runtime\Scripts"
-(echo python312.zip & echo . & echo import site) > runtime\python312._pth
-
-echo Installing pip...
-curl -L "https://bootstrap.pypa.io/get-pip.py" -o runtime\get-pip.py
-runtime\python.exe runtime\get-pip.py
-del runtime\get-pip.py
+rem Check if runtime already exists
+if exist "runtime\python.exe" (
+    echo Python runtime already exists, skipping download and extraction...
+) else (
+    echo Downloading Python 3.12.8 embedded package...
+    curl -L "https://www.python.org/ftp/python/3.12.8/python-3.12.8-embed-amd64.zip" -o python_embed.zip
+    
+    echo Extracting
+    powershell -command "Expand-Archive -Force python_embed.zip runtime"
+    del python_embed.zip
+    
+    echo Creating directories
+    if not exist "runtime\Lib" mkdir "runtime\Lib"
+    if not exist "runtime\Lib\site-packages" mkdir "runtime\Lib\site-packages"
+    if not exist "runtime\Scripts" mkdir "runtime\Scripts"
+    (echo python312.zip & echo . & echo import site) > runtime\python312._pth
+    
+    echo Installing pip...
+    curl -L "https://bootstrap.pypa.io/get-pip.py" -o runtime\get-pip.py
+    runtime\python.exe runtime\get-pip.py
+    del runtime\get-pip.py
+)
 
 echo Installing Packages
 :: Install packages
@@ -40,9 +46,18 @@ runtime\python.exe -m pip install --no-warn-script-location pydub==0.25.1
 runtime\python.exe -m pip install --no-warn-script-location matplotlib==3.10.1
 runtime\python.exe -m pip install --no-warn-script-location numpy==1.26.4
 runtime\python.exe -m pip install --no-warn-script-location rich==14.0.0
+runtime\python.exe -m pip install --no-warn-script-location pystray
+runtime\python.exe -m pip install --no-warn-script-location triton-windows
+runtime\python.exe -m pip install --no-warn-script-location https://github.com/codename0og/codename-essentials/raw/refs/heads/main/ring_attention_pytorch-0.5.17-py3-none-any.whl
 
-echo Extracting Tkinter
-powershell -command "Expand-Archive -Force zips\tkinter3128.zip runtime"
+
+rem Check if Tkinter already exists
+if exist "runtime\tcl86t.dll" (
+    echo Tkinter already exists, skipping extraction...
+) else (
+    echo Extracting Tkinter
+    powershell -command "Expand-Archive -Force zips\tkinter3128.zip runtime"
+)
 
 rem // Updated assets download and extraction block using a flag
 set "download_assets=false"

@@ -5,6 +5,47 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
+# This is temporary as pystray / pillow is required for the minimize to tray function, some users may not rerun setup.
+# It will be removed in the next release
+def ensure_pystray():
+    """Check if pystray is installed and install it if not"""
+    try:
+        import pystray
+        return True
+    except ImportError:
+        import subprocess
+        
+        # Use runtime python to install pystray and Pillow (required dependency)
+        python_exe = os.path.join(current_dir, "runtime", "python.exe")
+        
+        try:
+            # Install pystray and Pillow
+            result = subprocess.run(
+                [python_exe, "-m", "pip", "install", "pystray", "Pillow"],
+                capture_output=True,
+                text=True
+            )
+            
+            if result.returncode == 0:
+                return True
+            else:
+                print(f"Failed to install pystray: {result.stderr}")
+                return False
+        except Exception as e:
+            print(f"Error installing pystray: {e}")
+            return False
+
 if __name__ == "__main__":
+    ensure_pystray()
+    
+    # Check for --hidden flag to restart without console
+    if "--hidden" in sys.argv and "--restarted" not in sys.argv:
+        import subprocess
+        # Restart the script without a console window
+        CREATE_NO_WINDOW = 0x08000000
+        subprocess.Popen([sys.executable, __file__, "--hidden", "--restarted"], 
+                        creationflags=CREATE_NO_WINDOW)
+        sys.exit(0)
+    
     from gui.gui import GUI
     GUI()
