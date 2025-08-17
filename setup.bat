@@ -45,6 +45,7 @@ runtime\python.exe -m pip install --no-warn-script-location keyboard==0.13.5
 runtime\python.exe -m pip install --no-warn-script-location pydub==0.25.1
 runtime\python.exe -m pip install --no-warn-script-location matplotlib==3.10.1
 runtime\python.exe -m pip install --no-warn-script-location pystray
+runtime\python.exe -m pip install --no-warn-script-location psutil
 runtime\python.exe -m pip install --no-warn-script-location numpy==1.26.4
 runtime\python.exe -m pip install --no-warn-script-location rich==14.0.0
 runtime\python.exe -m pip install --no-warn-script-location triton-windows
