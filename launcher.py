@@ -5,6 +5,13 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
+# Initialize CPU limits early to prevent high CPU usage
+try:
+    from utils.cpu_manager import initialize_cpu_limits
+    initialize_cpu_limits()  # Uses dynamic calculation: total_cores / 4
+except Exception as e:
+    print(f"Warning: Could not initialize CPU limits: {e}")
+
 # This is temporary as pystray / pillow is required for the minimize to tray function, some users may not rerun setup.
 # It will be removed in the next release
 def ensure_pystray():
