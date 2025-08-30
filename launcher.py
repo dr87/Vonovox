@@ -8,7 +8,15 @@ if current_dir not in sys.path:
 # Initialize CPU limits early to prevent high CPU usage
 try:
     from utils.cpu_manager import initialize_cpu_limits
-    initialize_cpu_limits()  # Uses dynamic calculation: total_cores / 4
+    
+    # Check for --use-all-cores flag
+    if "--use-all-cores" in sys.argv:
+        import psutil
+        total_cores = psutil.cpu_count() or 4
+        initialize_cpu_limits(max_cores=total_cores, max_threads=total_cores)
+        print(f"Using all {total_cores} CPU cores (--use-all-cores flag)")
+    else:
+        initialize_cpu_limits()  # Uses dynamic calculation: total_cores / 4
 except Exception as e:
     print(f"Warning: Could not initialize CPU limits: {e}")
 

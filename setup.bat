@@ -32,10 +32,10 @@ runtime\python.exe -m pip install --no-warn-script-location torch torchvision to
 runtime\python.exe -m pip install --no-warn-script-location python-dotenv==1.0.1
 runtime\python.exe -m pip install --no-warn-script-location sounddevice==0.5.1
 runtime\python.exe -m pip install --no-warn-script-location local-attention==1.9.15
-runtime\python.exe -m pip install --no-warn-script-location faiss-cpu==1.9.0.post1
+runtime\python.exe -m pip install --no-warn-script-location faiss-cpu
 runtime\python.exe -m pip install --no-warn-script-location customtkinter==5.2.2
 runtime\python.exe -m pip install --no-warn-script-location pyrnnoise==0.2.7
-runtime\python.exe -m pip install --no-warn-script-location librosa==0.10.2.post1
+runtime\python.exe -m pip install --no-warn-script-location librosa==0.9.1
 runtime\python.exe -m pip install --no-warn-script-location transformers==4.47.1
 runtime\python.exe -m pip install --no-warn-script-location pywin32==308
 runtime\python.exe -m pip install --no-warn-script-location pedalboard==0.9.16
