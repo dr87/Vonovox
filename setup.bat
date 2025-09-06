@@ -49,6 +49,7 @@ runtime\python.exe -m pip install --no-warn-script-location psutil
 runtime\python.exe -m pip install --no-warn-script-location numpy==1.26.4
 runtime\python.exe -m pip install --no-warn-script-location rich==14.0.0
 runtime\python.exe -m pip install --no-warn-script-location triton-windows
+runtime\python.exe -m pip install --no-warn-script-location swift-f0
 runtime\python.exe -m pip install --no-warn-script-location https://github.com/codename0og/codename-essentials/raw/refs/heads/main/ring_attention_pytorch-0.5.17-py3-none-any.whl
 
 
