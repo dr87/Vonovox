@@ -34,7 +34,7 @@ I put a focus to make this setup process as easy as possible.
 
 1. Make sure you have this [Microsoft Redistributable package](https://aka.ms/vs/16/release/vc_redist.x64.exe)
 2. Download the latest release on this page
-3. Run `setup.bat` (run the RTX_5000 setup if you have an RTX 5000 card) to create a local python environment and download all packages and assets
+3. Run `setup.bat` 
 4. Run `start.bat` to start the voice converter. First run may take some extra time.
 5. Load whichever RVC v2 model you choose.
 
